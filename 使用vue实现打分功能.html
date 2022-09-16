@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  
+</body>
+<script src="https://unpkg.com/vue@3"></script>
+
+<div id="app">
+  {{ message }}
+  <div>{{ score }}</div>
+  <div id="star" v-show="isShow">
+    <button @click="creatementOne">1</button>
+    <button>2</button>
+    <button>3</button>
+    <button @click="creatementFour">4</button>
+    <button>5</button>
+  </div>
+  
+</div>
+
+<script>
+  const { createApp } = Vue
+
+  const app = createApp({
+    data() {
+      return {
+        message: 'Hello Vue!',
+        score: 0,
+        isShow: true
+      }
+    },
+    methods: {
+      creatementOne() {
+        this.score++
+      },
+      creatementFour() {
+        this.score += 4
+      }
+    },
+    watch: {
+      score(val, oldval) {
+        if(val !== oldval)
+          this.isShow = false
+      }
+    }
+  })
+  app.mount('#app')
+</script>
+</html>

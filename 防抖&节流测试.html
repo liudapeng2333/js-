@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="firefox">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    height: 2000px;
+  }
+</style>
+
+<body>
+  <div>
+    <input type="text">
+  </div>
+
+</body>
+<script>
+  
+let ip = document.querySelector('input')
+
+ip.oninput = debounce((e) => {
+  console.log(e.target.value)
+}, 500)
+
+
+window.onscroll = throttle(() => {
+  console.log('hello world')
+}, 500)
+
+// 封装防抖函数
+function debounce(func, delay) {
+  // timer为计时器
+  let timer = null
+  return function(...args) {
+    if (timer) {
+      // 将前一个事件的定时器给销毁
+      clearTimeout(timer)
+    }
+
+    timer = setTimeout(() => {
+      func.call(this, ...args)
+    }, delay)
+    
+  }
+}
+
+
+// 封装节流函数
+function throttle(func, delay) {
+  let timer = null
+  return () => {
+    if (!timer) {
+      timer = setTimeout(() => {
+        func.call(this)
+        timer = null
+      }, delay)
+    }
+  }
+}
+
+  
+</script>
+</html>

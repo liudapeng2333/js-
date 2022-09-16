@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      top: 200px;
+      margin: auto;
+    }
+    .currentImage {
+      width: 600px;
+    }
+    .prev,
+    .next {
+      position: absolute;
+      height: 30px;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: aliceblue;
+      border-radius: 10%;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .prev {
+      left: 0;
+    }
+    .next {
+      right: 0;
+    }
+    .dot {
+      position: absolute;
+      height: 20px;
+      width: 200px;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+    .dotUl {
+      display: flex;
+      justify-content: space-around;
+    }
+    .dotUl li {
+      background-color: aliceblue;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      list-style-type: none;
+    }
+    .dotUl li.activeLi {
+      background-color: coral;
+    }
+  </style>
+  <body>
+    <div class="box">
+      <div class="focus">
+        <img class="currentImage" src="./images/image1.webp" alt="轮播图" />
+      </div>
+      <button class="prev"><</button>
+      <button class="next">></button>
+      <div class="dot">
+        <ul class="dotUl">
+          <li class="activeLi"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script>
+    // 0.存储图片
+    let imgArr = [
+      "./images/image1.webp",
+      "./images/image2.webp",
+      "./images/image3.webp",
+      "./images/image4.webp",
+      "./images/image5.webp",
+    ];
+
+    // 1.获取数据
+    let box = document.querySelector(".box");
+    let prevBtn = document.querySelector(".prev");
+    let nextBtn = document.querySelector(".next");
+    let curImg = document.querySelector(".currentImage");
+    let urLi = document.querySelectorAll(".dotUl li");
+    // 初始图片和圆点的下标
+    let index = 0;
+    // 定时器
+    let timer = null;
+    console.log(prevBtn, nextBtn, curImg, urLi);
+
+    function setTimer() {
+      timer = setInterval(function () {
+        nextBtn.onclick()
+      }, 2000);
+    }
+    function setActiveImg() {
+      curImg.src = imgArr[index];
+      let activeLi = document
+        .querySelector(".activeLi")
+        .classList.remove("activeLi");
+      urLi[index].classList.add("activeLi");
+    }
+
+    prevBtn.addEventListener("click", function () {
+      if (index === 0) {
+        index = imgArr.length - 1;
+      } else {
+        index--;
+      }
+      setActiveImg();
+
+    });
+    nextBtn.onclick = function () {
+      if (index === imgArr.length - 1) {
+        index = 0;
+      } else {
+        index++;
+      }
+      setActiveImg();
+    };
+    // mouseenter不能使用事件委托，因为它是不冒泡的事件
+    for (let i = 0; i < urLi.length; i++) {
+      urLi[i].addEventListener("mouseenter", function () {
+        index = i;
+        setActiveImg();
+      });
+    }
+
+    box.addEventListener("mouseenter", function () {
+      clearInterval(timer);
+      timer = null;
+    });
+    box.addEventListener("mouseleave", function () {
+      if (!timer) {
+        setTimer();
+      }
+    });
+
+    if (!timer) {
+      setTimer();
+    }
+  </script>
+</html>
