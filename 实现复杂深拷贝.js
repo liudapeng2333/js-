@@ -29,6 +29,7 @@ function deepClone(target) {
 
       if (data instanceof Array) {
         const result = []
+        map.set(data, result)
         for (let i = 0; i < data.length; i++) {
           if (isObject(data[i])) {
             result.push(clone(data[i]))

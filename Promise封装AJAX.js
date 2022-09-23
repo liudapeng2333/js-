@@ -10,7 +10,7 @@ function ajax(method, url, data) {
         reject(xhr.status)
       }
     }
-    xhr.open('get', url)
+    xhr.open(method, url)
     xhr.send(data)
   })
 }
