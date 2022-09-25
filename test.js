@@ -1,12 +1,5 @@
-var p = {
-  a: 1,
-};
-var proxy = new Proxy(p, {
-  ownKeys(target) {
-    return Reflect.ownKeys(...arguments);
-  },
-});
+let str = "acacaca";
 
-console.log(Object.keys(proxy));
+let reg = /a(c)(a)/;
 
-
+console.log(reg.exec(str));

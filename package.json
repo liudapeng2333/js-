@@ -1,0 +1,20 @@
+{
+  "name": "interview_code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Promise.all.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liudapeng2333/js-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liudapeng2333/js-/issues"
+  },
+  "homepage": "https://github.com/liudapeng2333/js-#readme"
+}

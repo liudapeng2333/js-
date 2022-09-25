@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{title}}</h1>
+      <h1 id="name">{{name}}</h1>
+    </div>
+  </body>
+  <script src="js/myVue.js"></script>
+  <script src="js/compile.js"></script>
+  <script src="js/observer.js"></script>
+  <script src="js/watcher.js"></script>
+  <script>
+    let ele = document.getElementById("name");
+    let myVue = new MyVue({
+      el: "#app",
+      data: {
+        title: 'hello world',
+        name: 'liu'
+      }
+    });
+    window.setTimeout(() => {
+      console.log("name值改变了");
+      myVue.name = "canfoo";
+    }, 2000);
+  </script>
+</html>
