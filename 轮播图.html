@@ -17,16 +17,33 @@
     .currentImage {
       width: 600px;
     }
-    .prev,
-    .next {
+    .focus:hover + .nav label {
+      opacity: 0.5;
+    }
+    .nav label:hover {
+      opacity: 1;
+    }
+    .nav label {
       position: absolute;
-      height: 30px;
+      height: 100%;
+      width: 100px;
+      z-index: 9;
+      cursor: pointer;
       background-color: rgba(0, 0, 0, 0.2);
-      color: aliceblue;
-      border-radius: 10%;
+
+      opacity: 0;
+      transition: opacity 0.2s;
+      
       top: 0;
       bottom: 0;
       margin: auto;
+      
+      line-height: 400px;
+      text-align: center;
+      font-size: 50pt;
+      font-family: "Varela Round", sans-serif;
+      color: aliceblue;
+      
     }
     .prev {
       left: 0;
@@ -64,8 +81,11 @@
       <div class="focus">
         <img class="currentImage" src="./images/image1.webp" alt="轮播图" />
       </div>
-      <button class="prev"><</button>
-      <button class="next">></button>
+      <div class="nav">
+        <label class="prev">&#x2039;</label>
+        <label class="next">&#x203a;</label>
+      </div>
+
       <div class="dot">
         <ul class="dotUl">
           <li class="activeLi"></li>
@@ -101,7 +121,7 @@
 
     function setTimer() {
       timer = setInterval(function () {
-        nextBtn.onclick()
+        nextBtn.onclick();
       }, 2000);
     }
     function setActiveImg() {
@@ -119,7 +139,6 @@
         index--;
       }
       setActiveImg();
-
     });
     nextBtn.onclick = function () {
       if (index === imgArr.length - 1) {
