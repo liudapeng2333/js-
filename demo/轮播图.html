@@ -17,6 +17,22 @@
     .currentImage {
       width: 600px;
     }
+    .fadein {
+      -webkit-transition: all 0.67s;
+      -moz-transition: all 0.67s;
+      -ms-transition: all 0.67s;
+      -o-transition: all 0.67s;
+      transition: all 0.67s;
+      opacity: 1;
+    }
+    .fadeout {
+      -webkit-transition: all 0.67s;
+      -moz-transition: all 0.67s;
+      -ms-transition: all 0.67s;
+      -o-transition: all 0.67s;
+      transition: all 0.67s;
+      opacity: 0;
+    }
     .focus:hover + .nav label {
       opacity: 0.5;
     }
@@ -33,17 +49,16 @@
 
       opacity: 0;
       transition: opacity 0.2s;
-      
+
       top: 0;
       bottom: 0;
       margin: auto;
-      
+
       line-height: 400px;
       text-align: center;
       font-size: 50pt;
       font-family: "Varela Round", sans-serif;
       color: aliceblue;
-      
     }
     .prev {
       left: 0;
@@ -74,6 +89,55 @@
     }
     .dotUl li.activeLi {
       background-color: coral;
+    }
+    .disappear {
+      animation: moveA 1s 0s 1;
+    }
+    @keyframes moveA {
+      0% {
+        opacity: 1;
+      }
+
+      20% {
+        opacity: 0.8;
+      }
+      40% {
+        opacity: 0.6;
+      }
+      60% {
+        opacity: 0.4;
+      }
+      80% {
+        opacity: 0.2;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .appear {
+      animation: moveB 1s 0s 1;
+    }
+    @keyframes moveB {
+      0% {
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.2;
+      }
+      40% {
+        opacity: 0.4;
+      }
+      60% {
+        opacity: 0.6;
+      }
+      80% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   </style>
   <body>
@@ -125,11 +189,18 @@
       }, 2000);
     }
     function setActiveImg() {
+      curImg.classList.add("disappear");
       curImg.src = imgArr[index];
+      curImg.classList.add("appear");
+      let opacity = 0;
       let activeLi = document
         .querySelector(".activeLi")
         .classList.remove("activeLi");
       urLi[index].classList.add("activeLi");
+      setTimeout(() => {
+        curImg.classList.remove("disappear");
+        curImg.classList.remove("appear");
+      }, 300);
     }
 
     prevBtn.addEventListener("click", function () {
@@ -160,6 +231,7 @@
       clearInterval(timer);
       timer = null;
     });
+
     box.addEventListener("mouseleave", function () {
       if (!timer) {
         setTimer();
