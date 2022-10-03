@@ -11,14 +11,14 @@
   background: beige;
 }
 
-section {
-  display: block;
+.wrapper {
   width: 400px;
   height: 160px;
   background: lightgray;
+  position: relative;
 }
 
-p {
+.content {
   width: 50%;   /* == 400px * .5 = 200px */
   height: 25%;  /* == 160px * .25 = 40px */
   margin: 5%;   /* == 400px * .05 = 20px */
@@ -29,8 +29,8 @@ p {
 
 </style>
 <body>
-  <section>
-    <p>This is a paragraph!</p>
-  </section>
+  <div class="wrapper">
+    <div class="content">This is a paragraph!</div>
+  </div>
 </body>
 </html>
