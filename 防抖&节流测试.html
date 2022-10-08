@@ -24,7 +24,7 @@
   
 let ip = document.querySelector('input')
 
-ip.oninput = debounce((e) => {
+ip.oninput = debounce(function(e){
   console.log(e.target.value)
 }, 500)
 

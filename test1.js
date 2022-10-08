@@ -1,5 +1,4 @@
-import { sub, add } from "./test.js";
 
-
-console.log(add(1, 2));
-console.log(sub(1, 2));
+export default function(a, b) {
+  return a + b
+}
