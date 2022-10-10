@@ -36,12 +36,12 @@ Promise._allSettled = function (promises) {
     })
   }
 Promise.__allSettled = function(promises) {
+  let args = Array.prototype.slice.call(promises, 0)
   return new Promise((resolve, reject) => {
     if (!Array.isArray(promises) || promises.length === 0) {
       resolve([])
     }
-    let args = promises.slice()
-    let len = args.length
+    let len = promises.length
     function compute() {
       if (--len === 0) {
         resolve(args)
@@ -73,7 +73,7 @@ Promise.__allSettled = function(promises) {
 const p1 = Promise.resolve(1)
 const p2 = Promise.resolve(2)
 const p3 = new Promise((resolve, reject) => {
-  setTimeout(reject, 1000, 'three');
+  setTimeout(reject, 3000, 'three');
 });
 
 Promise.__allSettled([p1, p2, p3, 4])

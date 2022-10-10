@@ -5,5 +5,21 @@
     <title>fetch示例</title>
   </head>
   <body>
+    <div class="wrapper">
+      <span>a</span>
+    </div>
   </body>
+  <script>
+    let obj = {
+      fun1: function () {
+        console.log(this);
+      },
+    };
+
+    obj.fun1();
+    let func2 = obj.fun1;
+    func2()
+
+    let instanceObj = new obj.fun1()
+  </script>
 </html>
