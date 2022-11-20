@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .drag{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+  }
+</style>
+<body>
+  <div class="drag" draggable="true">~~可拖拽~~</div>
+
+</body>
+<script>
+  const dragElement = document.querySelector('.drag')
+  let diffX = 0, diffY = 0
+  dragElement.addEventListener('dragstart', (e) => {
+    diffX = e.clientX - dragElement.offsetLeft
+    diffY = e.clientY - dragElement.offsetTop
+  })
+  dragElement.addEventListener('drag', (e) => {
+    // console.log(e.target);
+  })
+  dragElement.addEventListener('dragend', (e) => {
+    let left = e.clientX - diffX
+    let top = e.clientY - diffY
+    dragElement.style.left = left + 'px'
+    dragElement.style.top = top + 'px'
+  })
+</script>
+</html>

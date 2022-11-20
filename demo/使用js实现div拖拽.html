@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .container {
+      left: 100px;
+      position: relative;
+      width: 500px;
+      height: 500px;
+      background-color: rebeccapurple;
+    }
+    .drag {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: aqua;
+      cursor: move;
+      right: 20px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="drag">可拖拽区域</div>
+    </div>
+  </body>
+  <script>
+    // 使用mousedown、mousemove、mouseup事件
+    const dragElement = document.querySelector(".drag");
+    let isDraging = false;
+    let diffX = 0;
+    let diffY = 0;
+    dragElement.addEventListener("mousedown", function(e) {
+      e = e || window.event;
+      diffX = e.clientX - dragElement.offsetLeft;
+      diffY = e.clientY - dragElement.offsetTop;
+      console.log(dragElement.offsetLeft);
+      isDraging = true;
+    });
+    const mousemoveF = function (e) {
+      e = e || window.event;
+      if (isDraging) {
+        let left = e.clientX - diffX;
+        let top = e.clientY - diffY;
+        if (left < 0) {
+          left = 0;
+        } else if (left > dragElement.offsetParent.offsetWidth - dragElement.offsetWidth) {
+          left = dragElement.offsetParent.offsetWidth - dragElement.offsetWidth;
+        }
+        if (top < 0) {
+          top = 0;
+        } else if (top > dragElement.offsetParent.offsetHeight - dragElement.offsetHeight) {
+          top = dragElement.offsetParent.offsetHeight - dragElement.offsetHeight;
+        }
+        dragElement.style.left = left + "px";
+        dragElement.style.top = top + "px";
+      }
+    };
+    window.addEventListener("mousemove", mousemoveF);
+    const mouseupF = function (e) {
+      if (isDraging) {
+        isDraging = false;
+      }
+    };
+    window.addEventListener("mouseup", mouseupF);
+  </script>
+</html>
